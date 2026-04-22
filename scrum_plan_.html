@@ -1,0 +1,207 @@
+
+<style>
+  .sprint-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 1rem; }
+  .sprint-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .sprint-badge { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; }
+  .badge-purple { background: #EEEDFE; color: #3C3489; }
+  .badge-teal { background: #E1F5EE; color: #085041; }
+  .badge-blue { background: #E6F1FB; color: #0C447C; }
+  .badge-amber { background: #FAEEDA; color: #633806; }
+  .story { display: flex; align-items: flex-start; gap: 8px; padding: 7px 10px; border-radius: var(--border-radius-md); background: var(--color-background-secondary); margin-bottom: 6px; font-size: 13px; color: var(--color-text-primary); cursor: pointer; }
+  .story:hover { background: var(--color-background-tertiary); }
+  .story-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+  .dot-func { background: #1D9E75; }
+  .dot-vis { background: #7F77DD; }
+  .dot-collab { background: #EF9F27; }
+  .story-type { font-size: 11px; padding: 2px 7px; border-radius: 10px; flex-shrink: 0; }
+  .type-func { background: #E1F5EE; color: #085041; }
+  .type-vis { background: #EEEDFE; color: #3C3489; }
+  .type-collab { background: #FAEEDA; color: #633806; }
+  .section-title { font-size: 11px; font-weight: 500; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 8px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1rem; }
+  .meta-card { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 12px; }
+  .meta-label { font-size: 11px; color: var(--color-text-tertiary); margin: 0 0 4px; }
+  .meta-value { font-size: 20px; font-weight: 500; color: var(--color-text-primary); margin: 0; }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 1rem; font-size: 12px; color: var(--color-text-secondary); }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .ceremony { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 0.5px solid var(--color-border-tertiary); font-size: 13px; }
+  .ceremony:last-child { border-bottom: none; }
+  .cer-tag { font-size: 11px; padding: 2px 8px; border-radius: 10px; background: var(--color-background-info); color: var(--color-text-info); }
+</style>
+
+<h2 class="sr-only">Plan d'action Scrum pour tester le site Test Mastery Platform ISTQB</h2>
+
+<div style="padding: 1rem 0;">
+
+  <div class="grid2">
+    <div class="meta-card">
+      <p class="meta-label">Durée totale</p>
+      <p class="meta-value">4 sprints</p>
+      <p style="font-size:12px;color:var(--color-text-tertiary);margin:4px 0 0;">2 semaines chacun</p>
+    </div>
+    <div class="meta-card">
+      <p class="meta-label">Environnement</p>
+      <p class="meta-value">UAT</p>
+      <p style="font-size:12px;color:var(--color-text-tertiary);margin:4px 0 0;">GitHub Pages + Xray</p>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><span class="story-dot dot-func"></span> Test fonctionnel</div>
+    <div class="legend-item"><span class="story-dot dot-vis"></span> Test visuel</div>
+    <div class="legend-item"><span class="story-dot dot-collab"></span> Collaboration équipe</div>
+  </div>
+
+  <!-- Sprint 0 -->
+  <div class="sprint-card">
+    <div class="sprint-header">
+      <span class="sprint-badge badge-purple">Sprint 0 — Semaine 1-2</span>
+      <span style="font-size:13px;font-weight:500;color:var(--color-text-primary)">Mise en place & prise en main</span>
+    </div>
+    <p class="section-title">Objectif du sprint</p>
+    <p style="font-size:13px;color:var(--color-text-secondary);margin:0 0 12px;">Toute l'équipe connaît le site, Jira/Xray est opérationnel, les rôles sont définis.</p>
+    <p class="section-title">User stories / tâches</p>
+    <div class="story" onclick="sendPrompt('Comment écrire une bonne user story pour un test visuel ?')">
+      <span class="story-dot dot-collab"></span>
+      <span style="flex:1">Définir les rôles Scrum : Scrum Master, PO, testeurs</span>
+      <span class="story-type type-collab">Équipe</span>
+    </div>
+    <div class="story" onclick="sendPrompt('Comment créer un test plan dans Xray ?')">
+      <span class="story-dot dot-collab"></span>
+      <span style="flex:1">Créer le Test Plan dans Xray et assigner les membres</span>
+      <span class="story-type type-collab">Équipe</span>
+    </div>
+    <div class="story" onclick="sendPrompt('Quelles sont les pages à tester sur ce site ISTQB ?')">
+      <span class="story-dot dot-func"></span>
+      <span style="flex:1">Explorer le site ensemble et lister toutes les pages/sections</span>
+      <span class="story-type type-func">Fonctionnel</span>
+    </div>
+    <div class="story" onclick="sendPrompt('Comment rédiger des critères d\'acceptance pour un quiz ?')">
+      <span class="story-dot dot-vis"></span>
+      <span style="flex:1">Définir les critères visuels attendus (couleurs, mise en page, responsive)</span>
+      <span class="story-type type-vis">Visuel</span>
+    </div>
+  </div>
+
+  <!-- Sprint 1 -->
+  <div class="sprint-card">
+    <div class="sprint-header">
+      <span class="sprint-badge badge-teal">Sprint 1 — Semaine 3-4</span>
+      <span style="font-size:13px;font-weight:500;color:var(--color-text-primary)">Tests de la navigation & contenu statique</span>
+    </div>
+    <p class="section-title">Objectif du sprint</p>
+    <p style="font-size:13px;color:var(--color-text-secondary);margin:0 0 12px;">Valider que toutes les pages s'affichent correctement et que la navigation fonctionne.</p>
+    <p class="section-title">User stories / tâches</p>
+    <div class="story" onclick="sendPrompt('Comment tester la navigation d\'un site web avec Xray ?')">
+      <span class="story-dot dot-func"></span>
+      <span style="flex:1">Tester les liens du menu : Accueil, Types de Tests, Tests Statiques, Tests Dynamiques, Quiz</span>
+      <span class="story-type type-func">Fonctionnel</span>
+    </div>
+    <div class="story" onclick="sendPrompt('Comment faire un test visuel des tableaux HTML ?')">
+      <span class="story-dot dot-vis"></span>
+      <span style="flex:1">Vérifier l'affichage des 4 tableaux ISTQB (colonnes, alignement, lisibilité)</span>
+      <span class="story-type type-vis">Visuel</span>
+    </div>
+    <div class="story" onclick="sendPrompt('Comment tester les éléments interactifs cliquables d\'une page ?')">
+      <span class="story-dot dot-func"></span>
+      <span style="flex:1">Tester les 5 cartes cliquables "Types de Tests" (Boîte noire, Boîte blanche…)</span>
+      <span class="story-type type-func">Fonctionnel</span>
+    </div>
+    <div class="story" onclick="sendPrompt('Comment tester la pyramide des tests interactive ?')">
+      <span class="story-dot dot-vis"></span>
+      <span style="flex:1">Vérifier l'affichage de la pyramide des tests et le texte au clic sur chaque niveau</span>
+      <span class="story-type type-vis">Visuel</span>
+    </div>
+  </div>
+
+  <!-- Sprint 2 -->
+  <div class="sprint-card">
+    <div class="sprint-header">
+      <span class="sprint-badge badge-blue">Sprint 2 — Semaine 5-6</span>
+      <span style="font-size:13px;font-weight:500;color:var(--color-text-primary)">Tests du Quiz interactif</span>
+    </div>
+    <p class="section-title">Objectif du sprint</p>
+    <p style="font-size:13px;color:var(--color-text-secondary);margin:0 0 12px;">Couvrir tous les scénarios du quiz : filtres, nombre de questions, résultats.</p>
+    <p class="section-title">User stories / tâches</p>
+    <div class="story" onclick="sendPrompt('Comment tester les filtres d\'un quiz avec Xray ?')">
+      <span class="story-dot dot-func"></span>
+      <span style="flex:1">Tester les filtres par thème : Tests Statiques, Dynamiques, Niveaux, Boîtes N/B</span>
+      <span class="story-type type-func">Fonctionnel</span>
+    </div>
+    <div class="story" onclick="sendPrompt('Comment tester le nombre de questions d\'un quiz ?')">
+      <span class="story-dot dot-func"></span>
+      <span style="flex:1">Tester les 4 options de nombre de questions (5, 10, 15, 20) et vérifier le compte</span>
+      <span class="story-type type-func">Fonctionnel</span>
+    </div>
+    <div class="story" onclick="sendPrompt('Comment vérifier l\'affichage du score dans un quiz ?')">
+      <span class="story-dot dot-vis"></span>
+      <span style="flex:1">Vérifier l'affichage du score (0/0, pourcentage) et le bouton Recommencer</span>
+      <span class="story-type type-vis">Visuel</span>
+    </div>
+    <div class="story" onclick="sendPrompt('Comment tester la combinaison filtre + nombre de questions ?')">
+      <span class="story-dot dot-func"></span>
+      <span style="flex:1">Tester la combinaison filtre + nombre de questions (ex: Boîtes N/B + 10 questions)</span>
+      <span class="story-type type-func">Fonctionnel</span>
+    </div>
+    <div class="story" onclick="sendPrompt('Comment tester le bouton Lancer le quiz ?')">
+      <span class="story-dot dot-func"></span>
+      <span style="flex:1">Vérifier le bouton "Lancer le quiz ↗" avec différentes combinaisons</span>
+      <span class="story-type type-func">Fonctionnel</span>
+    </div>
+  </div>
+
+  <!-- Sprint 3 -->
+  <div class="sprint-card">
+    <div class="sprint-header">
+      <span class="sprint-badge badge-amber">Sprint 3 — Semaine 7-8</span>
+      <span style="font-size:13px;font-weight:500;color:var(--color-text-primary)">Tests avancés & rapport final</span>
+    </div>
+    <p class="section-title">Objectif du sprint</p>
+    <p style="font-size:13px;color:var(--color-text-secondary);margin:0 0 12px;">Tests responsive, accessibilité, rapport de bugs et retrospective d'équipe.</p>
+    <p class="section-title">User stories / tâches</p>
+    <div class="story" onclick="sendPrompt('Comment tester le responsive design d\'un site avec Xray ?')">
+      <span class="story-dot dot-vis"></span>
+      <span style="flex:1">Tester l'affichage responsive sur mobile, tablette et desktop</span>
+      <span class="story-type type-vis">Visuel</span>
+    </div>
+    <div class="story" onclick="sendPrompt('Comment tester l\'accessibilité d\'un site web ?')">
+      <span class="story-dot dot-vis"></span>
+      <span style="flex:1">Vérifier la lisibilité (contraste texte/fond, taille des polices)</span>
+      <span class="story-type type-vis">Visuel</span>
+    </div>
+    <div class="story" onclick="sendPrompt('Comment rédiger un rapport de bug dans Jira ?')">
+      <span class="story-dot dot-collab"></span>
+      <span style="flex:1">Rédiger les rapports de défauts trouvés dans Jira et les lier aux test cases Xray</span>
+      <span class="story-type type-collab">Équipe</span>
+    </div>
+    <div class="story" onclick="sendPrompt('Comment faire une rétrospective Scrum en équipe ?')">
+      <span class="story-dot dot-collab"></span>
+      <span style="flex:1">Rétrospective : ce qui a bien marché, ce qui peut être amélioré</span>
+      <span class="story-type type-collab">Équipe</span>
+    </div>
+  </div>
+
+  <!-- Cérémonies Scrum -->
+  <div class="sprint-card">
+    <div class="sprint-header">
+      <span style="font-size:13px;font-weight:500;color:var(--color-text-primary)">Cérémonies Scrum à faire chaque sprint</span>
+    </div>
+    <div class="ceremony">
+      <span class="cer-tag">Sprint Planning</span>
+      <span style="font-size:13px;color:var(--color-text-secondary);">Jour 1 — choisir les user stories du sprint et les assigner</span>
+    </div>
+    <div class="ceremony">
+      <span class="cer-tag">Daily</span>
+      <span style="font-size:13px;color:var(--color-text-secondary);">Chaque jour — 15 min : qu'est-ce que j'ai fait / je vais faire / blocage ?</span>
+    </div>
+    <div class="ceremony">
+      <span class="cer-tag">Sprint Review</span>
+      <span style="font-size:13px;color:var(--color-text-secondary);">Jour 10 — présenter les tests réalisés et les bugs trouvés</span>
+    </div>
+    <div class="ceremony">
+      <span class="cer-tag">Rétrospective</span>
+      <span style="font-size:13px;color:var(--color-text-secondary);">Jour 10 — améliorer le processus pour le sprint suivant</span>
+    </div>
+  </div>
+
+</div>
