@@ -1,284 +1,144 @@
-[slides]
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Présentation QA - Équipe de 4</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>AI QA Guardian - Testeur de site intelligent</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* CONFIGURATION GÉNÉRALE */
-        * { box-sizing: border-box; }
-        body { background-color: #0f172a; margin: 0; padding: 0; overflow-x: hidden; }
-        
-        .slide-container {
-            width: 1280px;
-            height: 720px;
-            background-color: #0f172a; /* Fond sombre profond */
-            color: #f8fafc;
-            font-family: 'Urbanist', sans-serif;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            padding: 60px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* DÉCORATIONS DE FOND (Abstract Shapes) */
-        .slide-container::before {
-            content: '';
-            position: absolute;
-            top: -10%;
-            right: -10%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
-            z-index: 0;
-        }
-
-        /* TYPOGRAPHIE CONSULTING */
-        h1, h2, h3 { margin: 0; font-weight: 700; z-index: 1; }
-        h1 { font-size: 68px; line-height: 1.1; color: #38bdf8; }
-        .slide-title { font-size: 42px; margin-bottom: 40px; color: #38bdf8; border-left: 6px solid #38bdf8; padding-left: 20px; }
-        p, li { font-family: 'Inter', sans-serif; font-size: 20px; line-height: 1.6; color: #cbd5e1; }
-
-        .content-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; z-index: 1; }
-
-        /* LAYOUTS SPÉCIFIQUES */
-        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%; }
-        
-        /* TILED CONTENT */
-        .tiled-content { display: flex; gap: 25px; width: 100%; height: 100%; }
-        .tile {
-            flex: 1;
-            background: rgba(30, 41, 59, 0.7);
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            border-radius: 16px;
-            padding: 30px;
-            transition: transform 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        .tile .icon { font-size: 44px; color: #38bdf8; margin-bottom: 20px; }
-        .tile h3 { font-size: 24px; margin-bottom: 15px; color: #f8fafc; }
-
-        /* HIGHLIGHTED NUMBERS */
-        .highlight-numbers { display: flex; justify-content: space-around; align-items: center; width: 100%; }
-        .number-box { text-align: center; }
-        .number { font-size: 110px; font-weight: 700; color: #38bdf8; line-height: 1; }
-        .number-label { font-size: 22px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
-
-        /* IMAGES */
-        .image-wrapper { width: 100%; height: 100%; border-radius: 12px; overflow: hidden; border: 2px solid rgba(56, 189, 248, 0.2); }
-        .image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* SECTION TITLE STYLE */
-        .section-title-layout { text-align: center; justify-content: center; align-items: center; height: 100%; }
-        .section-title-layout hr { width: 100px; height: 4px; background: #38bdf8; border: none; margin: 30px 0; }
-
-        /* STYLED BULLETS */
-        .bullet-list { list-style: none; padding: 0; }
-        .bullet-list li { margin-bottom: 25px; display: flex; align-items: flex-start; gap: 15px; }
-        .bullet-list i { color: #38bdf8; font-size: 24px; margin-top: 4px; }
-
-        /* BLEED IMAGE */
-        .bleed-image-layout { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 0; align-items: start; }
-        .bleed-image-layout .content-container { padding: 60px; }
-        .bleed-image-layout .image-container { height: 100%; }
-        .bleed-image-layout .image-container img { height: 720px; width: 100%; object-fit: cover; }
-
-        /* QUOTE */
-        .quote-layout { text-align: center; padding: 40px; }
-        .quote-layout blockquote { font-size: 48px; font-style: italic; color: #38bdf8; margin-bottom: 20px; }
-        .quote-layout cite { font-size: 24px; color: #94a3b8; }
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #f0f4fa 0%, #e6edf5 100%); }
+        .glass-card { background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); border-radius: 36px; box-shadow: 0 12px 35px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.6); }
+        .gradient-text { background: linear-gradient(120deg, #2563eb, #7c3aed); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .loading-spinner { border: 3px solid #e2e8f0; border-top: 3px solid #3b82f6; border-radius: 50%; width: 42px; height: 42px; animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .severity-Critical { background: #7f1a1a; }
+        .severity-High { background: #dc2626; }
+        .severity-Medium { background: #f59e0b; }
+        .severity-Low { background: #10b981; }
+        .severity-Élevé { background: #dc2626; }
+        .severity-Moyen { background: #f59e0b; }
+        .severity-Faible { background: #10b981; }
+        .tab-btn.active { background: white; color: #2563eb; border-bottom: 2px solid #2563eb; }
     </style>
 </head>
-<body>
+<body class="p-4 md:p-8 min-h-screen flex items-center justify-center">
+    <div class="max-w-6xl w-full mx-auto">
+        <div class="text-center mb-10">
+            <h1 class="text-5xl font-bold gradient-text mb-3">🤖 AI Quality Guardian</h1>
+            <p class="text-gray-600 text-lg">Analyse proactive • Apprentissage automatique • Rapport détaillé</p>
+        </div>
 
-<div class="slide-container" id="slide1">
-    <div class="content-area" style="text-align: center;">
-        <h3 style="text-transform: uppercase; letter-spacing: 5px; color: #94a3b8; margin-bottom: 20px;">Rapport de Fin de Projet QA</h3>
-        <h1>Assurance Qualité &<br><span style="color: #f8fafc;">Innovation Collaborative</span></h1>
-        <p style="margin-top: 40px; font-size: 24px;">Application de Gestion de Tâches • Équipe de 4 Testeurs</p>
-    </div>
-</div>
-
-<div class="slide-container" id="slide2">
-    <div class="section-title-layout">
-        <h2>I. Structure & Organisation</h2>
-        <hr>
-        <p>Une synergie d'équipe optimisée pour l'excellence opérationnelle.</p>
-    </div>
-</div>
-
-<div class="slide-container" id="slide3">
-    <h2 class="slide-title">Répartition des Expertises</h2>
-    <div class="content-area">
-        <div class="tiled-content">
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-chess-knight"></i></div>
-                <h3>Jinan Touzri</h3>
-                <p>Architecture de la Stratégie de Test et pilotage global.</p>
+        <div class="glass-card p-6 mb-8">
+            <div class="flex flex-col md:flex-row gap-4">
+                <input type="text" id="urlInput" placeholder="https://exemple.com ou exemple.com" class="flex-1 px-5 py-3 rounded-2xl border border-gray-200 bg-white/70 focus:ring-2 focus:ring-blue-400 outline-none">
+                <button id="analyzeBtn" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold px-8 py-3 rounded-2xl transition flex items-center justify-center gap-2 shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                    Lancer l'analyse IA
+                </button>
             </div>
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-microscope"></i></div>
-                <h3>Roua Dridi</h3>
-                <p>Expertise en Tests Statiques et revue de code précoce.</p>
-            </div>
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-code"></i></div>
-                <h3>Karim Sabri</h3>
-                <p>Lead Automatisation via Robot Framework & Python.</p>
-            </div>
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-shield-check"></i></div>
-                <h3>Teddy Zollver</h3>
-                <p>Suivi rigoureux, Validation finale et Reporting Jira.</p>
+            <div id="loading" class="hidden mt-6 flex justify-center items-center gap-4">
+                <div class="loading-spinner"></div>
+                <span class="text-gray-500">L'IA générative analyse, apprend et construit le rapport...</span>
             </div>
         </div>
-    </div>
-</div>
 
-<div class="slide-container" id="slide4">
-    <h2 class="slide-title">La Force de la Cohésion</h2>
-    <div class="content-area">
-        <div class="two-column">
-            <div>
-                <ul class="bullet-list">
-                    <li><i class="fa-solid fa-users-rays"></i> <strong>Synchronisation Critique :</strong> Mise en place de plusieurs "Daily syncs" par jour pour lever les bloqueurs instantanément.</li>
-                    <li><i class="fa-solid fa-diagram-project"></i> <strong>Culture du Partage :</strong> Partage de connaissances cross-expertises pour garantir la continuité du projet.</li>
-                    <li><i class="fa-solid fa-arrows-to-circle"></i> <strong>Méthodologie Commune :</strong> Alignement strict sur les standards de reporting Jira et Xray.</li>
-                </ul>
+        <div id="resultContainer" class="hidden glass-card p-6 transition-all duration-300">
+            <div class="flex border-b border-gray-200 gap-2 mb-6">
+                <button data-tab="rapport" class="tab-btn px-5 py-2 font-medium rounded-t-xl transition-all">📋 Rapport IA</button>
+                <button data-tab="bugs" class="tab-btn px-5 py-2 font-medium rounded-t-xl transition-all">🐞 Bugs détectés</button>
+                <button data-tab="plan" class="tab-btn px-5 py-2 font-medium rounded-t-xl transition-all">📌 Plan d'action</button>
+                <button data-tab="learning" class="tab-btn px-5 py-2 font-medium rounded-t-xl transition-all">🧠 Apprentissage</button>
             </div>
-            <div class="image-wrapper">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/6478447465863361515" alt="Collaboration d'équipe Agile">
+
+            <div id="rapport" class="tab-content">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div><h3 class="text-xl font-semibold">📊 Synthèse générative</h3><p id="summaryText" class="text-gray-700 mt-2"></p><div class="mt-4 p-4 bg-gray-50 rounded-2xl"><p class="text-sm text-gray-500">Risque global</p><p id="riskBadge" class="text-2xl font-bold"></p></div></div>
+                    <div><h3 class="text-xl font-semibold">⚡ Métriques techniques</h3><div id="metrics" class="space-y-2 text-sm mt-2"></div></div>
+                </div>
+                <canvas id="severityChart" class="mt-6 max-h-64"></canvas>
             </div>
+            <div id="bugs" class="tab-content hidden"><div id="bugsList" class="space-y-3"></div></div>
+            <div id="plan" class="tab-content hidden"><div class="bg-blue-50/40 rounded-2xl p-5"><h3 class="font-bold text-lg mb-3">✅ Actions recommandées (normes QA)</h3><ul id="planList" class="space-y-2 list-disc pl-5"></ul></div></div>
+            <div id="learning" class="tab-content hidden"><div class="bg-purple-50/30 rounded-2xl p-5"><p id="learningMessage"></p><div class="mt-3 text-xs text-gray-400 italic">Mémoire persistante : l'IA s'améliore à chaque analyse.</div></div></div>
+
+            <div class="flex justify-end mt-6"><button id="exportBtn" class="bg-gray-800 hover:bg-gray-900 text-white px-5 py-2 rounded-xl text-sm flex items-center gap-2">📄 Exporter le rapport (JSON)</button></div>
         </div>
+        <p class="text-center text-gray-400 text-xs mt-8">⚡ IA générative avec mémoire • Tests basés sur les standards logiciels</p>
     </div>
-</div>
 
-<div class="slide-container bleed-image-layout" id="slide5">
-    <div class="content-container">
-        <h2 class="slide-title" style="border:none; padding:0;">L'Agilité en Action</h2>
-        <p>Au-delà des outils, c'est notre capacité à communiquer en temps réel qui a sécurisé les délais.</p>
-        <p>Les synchronisations répétées ont permis d'identifier une faille critique sur la gestion des sessions avant même la phase de validation finale.</p>
-    </div>
-    <div class="image-container">
-        <img src="http://googleusercontent.com/image_collection/image_retrieval/10950372066310704949" alt="Icônes de réunion agile">
-    </div>
-</div>
+    <script>
+        let currentReport = null, chart = null;
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const urlInput = document.getElementById('urlInput');
+        const loading = document.getElementById('loading');
+        const resultDiv = document.getElementById('resultContainer');
 
-<div class="slide-container" id="slide6">
-    <div class="section-title-layout">
-        <h2>II. Innovation & IA</h2>
-        <hr>
-        <p>L'intelligence artificielle au service de la fiabilité technique.</p>
-    </div>
-</div>
+        analyzeBtn.addEventListener('click', async () => {
+            let url = urlInput.value.trim();
+            if (!url) return alert("Entrez une URL valide");
+            loading.classList.remove('hidden');
+            resultDiv.classList.add('hidden');
+            try {
+                const res = await fetch('/analyze', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url })
+                });
+                const data = await res.json();
+                if (data.error) throw new Error(data.error);
+                currentReport = data;
+                renderReport(data);
+                resultDiv.classList.remove('hidden');
+            } catch (err) { alert("Erreur : " + err.message); }
+            finally { loading.classList.add('hidden'); }
+        });
 
-<div class="slide-container" id="slide7">
-    <h2 class="slide-title">L'Écosystème Technologique</h2>
-    <div class="content-area">
-        <div class="two-column">
-            <div class="tile" style="text-align: left; align-items: flex-start;">
-                <div class="icon"><i class="fa-solid fa-robot"></i></div>
-                <h3>Robot Framework</h3>
-                <p>Simulations précises des parcours utilisateurs complexes et tests front-end reproductibles.</p>
-            </div>
-            <div class="tile" style="text-align: left; align-items: flex-start;">
-                <div class="icon"><i class="fa-brands fa-python"></i></div>
-                <h3>Pytest & Python</h3>
-                <p>Scripts sur-mesure pour l'intégration continue et remontée automatique des résultats dans Xray.</p>
-            </div>
-        </div>
-    </div>
-</div>
+        function renderReport(r) {
+            const scan = r.scan, analysis = r.analysis;
+            document.getElementById('summaryText').innerText = analysis.summary;
+            const riskSpan = document.getElementById('riskBadge');
+            riskSpan.innerText = analysis.overall_risk;
+            riskSpan.className = `text-2xl font-bold px-3 py-1 rounded-full inline-block severity-${analysis.overall_risk}`;
+            document.getElementById('metrics').innerHTML = `
+                <div class="flex justify-between"><span>⏱️ Temps réponse :</span><strong>${scan.response_time}s</strong></div>
+                <div class="flex justify-between"><span>📄 Statut HTTP :</span><strong>${scan.status_code}</strong></div>
+                <div class="flex justify-between"><span>🖼️ Images sans alt :</span><strong>${scan.missing_alt}/${scan.total_images}</strong></div>
+                <div class="flex justify-between"><span>📱 Viewport :</span><strong>${scan.has_viewport ? "✅ Oui" : "❌ Non"}</strong></div>
+                <div class="flex justify-between"><span>🔒 HTTPS :</span><strong>${scan.is_https ? "Activé" : "Non sécurisé"}</strong></div>
+                <div class="flex justify-between"><span>📝 Balises H1 :</span><strong>${scan.h1_count}</strong></div>
+            `;
+            const bugsDiv = document.getElementById('bugsList');
+            bugsDiv.innerHTML = '';
+            analysis.bugs.forEach(b => {
+                const div = document.createElement('div');
+                div.className = 'border-l-4 rounded-xl p-4 bg-white shadow-sm';
+                div.style.borderLeftColor = {Critical:'#7f1a1a', High:'#dc2626', Medium:'#f59e0b', Low:'#10b981'}[b.severity] || '#cbd5e1';
+                div.innerHTML = `<div class="flex justify-between"><h4 class="font-bold">${b.title}</h4><span class="severity-${b.severity} text-xs px-2 py-1 rounded-full text-white">${b.severity}</span></div><p class="text-gray-600 mt-1">${b.description}</p><p class="text-sm text-blue-700 mt-2">💡 ${b.recommendation}</p>`;
+                bugsDiv.appendChild(div);
+            });
+            document.getElementById('planList').innerHTML = analysis.test_plan.map(p => `<li class="text-gray-800">${p}</li>`).join('');
+            document.getElementById('learningMessage').innerHTML = r.learning_used ? "🧠 L'IA a utilisé ses apprentissages précédents sur ce domaine pour affiner la détection. Chaque analyse améliore la mémoire." : "✨ Première analyse pour ce domaine. L'IA va mémoriser les problèmes détectés pour les futures analyses.";
+            const counts = { Critical:0, High:0, Medium:0, Low:0, Élevé:0, Moyen:0, Faible:0 };
+            analysis.bugs.forEach(b => { let s = b.severity; counts[s] = (counts[s]||0)+1; });
+            const labels = ['Critique', 'Élevée', 'Moyenne', 'Faible'];
+            const data = [counts.Critical||0, (counts.High||0)+(counts.Élevé||0), (counts.Medium||0)+(counts.Moyen||0), (counts.Low||0)+(counts.Faible||0)];
+            if (chart) chart.destroy();
+            const ctx = document.getElementById('severityChart').getContext('2d');
+            chart = new Chart(ctx, { type: 'bar', data: { labels, datasets: [{ label: 'Nombre de bugs', data, backgroundColor: ['#7f1a1a','#dc2626','#f59e0b','#10b981'] }] }, options: { responsive: true } });
+        }
 
-<div class="slide-container" id="slide8">
-    <h2 class="slide-title">L'IA : Le Nouveau Standard</h2>
-    <div class="content-area">
-        <div class="two-column">
-            <div>
-                <ul class="bullet-list">
-                    <li><i class="fa-solid fa-bolt"></i> <strong>Gain de Temps :</strong> Génération rapide de cas de tests et de scripts d'automatisation.</li>
-                    <li><i class="fa-solid fa-eye"></i> <strong>Fiabilité :</strong> Élimination des erreurs humaines lors de l'analyse de données complexes.</li>
-                    <li><i class="fa-solid fa-sparkles"></i> <strong>Innovation :</strong> Optimisation des processus de test et suggestion de cas aux limites (edge cases).</li>
-                </ul>
-            </div>
-            <div class="image-wrapper">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/17820123734704057463" alt="IA et Testing Logiciel">
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="slide-container" id="slide9">
-    <h2 class="slide-title">Impact Mesurable</h2>
-    <div class="content-area">
-        <div class="highlight-numbers">
-            <div class="number-box">
-                <div class="number">x3</div>
-                <div class="number-label">Rapidité de Scripting</div>
-            </div>
-            <div class="number-box">
-                <div class="number">0</div>
-                <div class="number-label">Oublis Majeurs</div>
-            </div>
-            <div class="number-box">
-                <div class="number">100%</div>
-                <div class="number-label">Traçabilité Jira</div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="slide-container" id="slide10">
-    <div class="content-area quote-layout">
-        <blockquote>"L’IA n’est pas un remplaçant, mais un collaborateur qui permet de se concentrer sur l’innovation stratégique."</blockquote>
-        <cite>— Équipe QA Project 2024</cite>
-    </div>
-</div>
-
-<div class="slide-container" id="slide11" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
-    <h2 class="slide-title">Synthèse : Les Piliers du Succès</h2>
-    <div class="content-area">
-        <div class="tiled-content">
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-sitemap"></i></div>
-                <h3>Organisation</h3>
-                <p>Répartition chirurgicale et communication continue pour une cohésion à toute épreuve.</p>
-            </div>
-            <div class="tile">
-                <div class="icon"><i class="fa-solid fa-microchip"></i></div>
-                <h3>Maîtrise Technique</h3>
-                <p>Combinaison Robot/Python pour une couverture de test exhaustive et automatisée.</p>
-            </div>
-            <div class="tile" style="background: rgba(56, 189, 248, 0.1);">
-                <div class="icon" style="color: #f8fafc;"><i class="fa-solid fa-brain"></i></div>
-                <h3>Vision Futuriste</h3>
-                <p>L’IA intégrée comme outil de productivité, de fiabilité et d'innovation process.</p>
-            </div>
-        </div>
-    </div>
-    <p style="text-align: center; margin-top: 30px; font-weight: 700; color: #38bdf8;">Un projet mené avec succès par 4 experts QA.</p>
-</div>
-
-<div class="slide-container" id="slide12">
-    <div class="content-area" style="text-align: center;">
-        <h1 style="font-size: 100px;">Questions ?</h1>
-        <p style="font-size: 28px; margin-top: 20px;">Merci de votre attention.</p>
-        <div style="margin-top: 50px; color: #38bdf8;">
-            <i class="fa-solid fa-envelope"></i> contact.qa@projet.com
-        </div>
-    </div>
-</div>
-
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+                document.getElementById(btn.dataset.tab).classList.remove('hidden');
+            });
+        });
+        document.querySelector('.tab-btn').click();
+        document.getElementById('exportBtn').addEventListener('click', () => { if(currentReport) { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(currentReport,null,2)], {type:'application/json'})); a.download = `rapport_qa_${Date.now()}.json`; a.click(); URL.revokeObjectURL(a.href); } });
+    </script>
 </body>
 </html>
-
